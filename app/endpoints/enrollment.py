@@ -6,8 +6,13 @@ from app.models.enrollment import Enrollment
 from app.models.students import Student
 from app.models.activity import Activity
 from app.schemas.enrollment import ShowEnrollment, CreateEnrollment, UpdateEnrollment
+from app.core.dependencies import get_current_user
 
-router = APIRouter(prefix="/enrollment", tags=["enrollment"])
+router = APIRouter(
+    prefix="/enrollment",
+    tags=["enrollment"],
+    dependencies=[Depends(get_current_user)]
+)
 
 
 @router.get("/", response_model=list[ShowEnrollment])
