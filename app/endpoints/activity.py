@@ -11,9 +11,14 @@ from app.schemas.activity import (
 from app.models.activity_day import Activity_day
 from app.models.enrollment import Enrollment
 from app.models.day import Day
+from app.core.dependencies import get_current_user
 
 
-router = APIRouter(prefix="/activities", tags=["activities"])
+router = APIRouter(
+    prefix="/activities",
+    tags=["activities"],
+    dependencies=[Depends(get_current_user)]
+)
 
 
 # GET
