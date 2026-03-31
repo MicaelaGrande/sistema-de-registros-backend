@@ -7,9 +7,12 @@ from app.models.activity import Activity
 from app.models.day import Day
 
 from app.schemas.activity_day import ActivityDay, ActivityDayCreate, ActivityDayUpdate
+from app.core.dependencies import get_current_user
 
 router = APIRouter(
-    prefix="/activities/{activity_id}/activity-days", tags=["Activity Days"]
+    prefix="/activities/{activity_id}/activity-days",
+    tags=["Activity Days"],
+    dependencies=[Depends(get_current_user)]
 )
 
 def validate_activity(activity_id: int, db: Session):
